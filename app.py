@@ -62,6 +62,12 @@ def graphcall():
         ).json()
     return render_template('display.html', result=graph_data)
 
+@app.route("/hello")
+def hello():
+    token = _get_token_from_cache(app_config.SCOPE)
+    if not token:
+        return redirect(url_for("login"))
+    print("hello, world!")
 
 def _load_cache():
     cache = msal.SerializableTokenCache()
